@@ -87,6 +87,6 @@ Person.prototype.sayName = function(){
 
 用一张著名的图来表示：
 
-
+![](http://oxx2l7d61.bkt.clouddn.com/js1.png)
 
 图中我们可以发现一个问题，两个实例都不包含 **sayName()** 方法但却可以调用该方法，这就涉及到查找对象属性的过程，即依据**原型链**来查找。
