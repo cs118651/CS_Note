@@ -24,19 +24,19 @@ function palindrome(str) {
 
 ```
 function findLongestWord(str) {
-  //先将句子中每个单词分开并存入数组arr
-  var arr = str.split(' ');
-  //定义空数组length用于存放每个单词的长度
-  var length = [];
-  //遍历arr 将每个单词的长度push到length数组中
-  arr.forEach(function (item, index) {
-  	length.push(item.length); 
-  });
-  //将length数组从小到大排序并且执行pop()操作，会返回最后一个元素，也就是最大长度值
-  var result = length.sort(function (a,b) {
-  	return a-b;
-  }).pop()
-  return result;
+    //先将句子中每个单词分开并存入数组arr
+    var arr = str.split(' ');
+    //定义空数组length用于存放每个单词的长度
+    var length = [];
+    //遍历arr 将每个单词的长度push到length数组中
+    arr.forEach(function (item, index) {
+    	length.push(item.length); 
+    });
+    //将length数组从小到大排序并且执行pop()操作，会返回最后一个元素，也就是最大长度值
+    var result = length.sort(function (a,b) {
+    	 return a-b;
+    }).pop()
+    return result;
 }
 
 findLongestWord("What if we try a super-long word such as otorhinolaryngology"); 
@@ -46,4 +46,32 @@ findLongestWord("What if we try a super-long word such as otorhinolaryngology");
 
 。。。。。。。
 
-#### 3.一个句子中每个单词首字母大写
+#### 3.一个句子中每个单词首字母大写其他字母小写
+
+```
+function titleCase(str) {
+	//将传入的句子分词并存入arr中 
+	var arr = str.split(' ');
+	//将每个单词首字母大写 其他字母小写
+	str = arr.map(function (item) {
+		//将每个单词分成字母并存入数组arr1
+		var arr1 = item.split('');
+	  	arr1 = arr1.map(function (item, index) {
+			if (index === 0) {
+				 item = item.toUpperCase();
+			}else {
+				 item = item.toLowerCase();
+			}
+			return item;
+	});
+	//重新拼接处理后的单词
+	item = arr1.join('');
+	//返回每个单词
+	return item;
+	});
+	//拼接句子
+	str = str.join(' ');
+	return str;
+}
+```
+
