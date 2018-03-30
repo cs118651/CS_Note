@@ -12,7 +12,7 @@
 
 来看看我们如何使用 reduce 只迭代数组一次，来完成同样的结果。下面这个例子我们需要把数组中的值乘 2 ，并返回大于 50 的值：
 
-```
+```javascript
 const numbers = [10, 20, 30, 40];
 const doubledOver50 = numbers.reduce((finalList, num) => {
   
@@ -26,5 +26,35 @@ const doubledOver50 = numbers.reduce((finalList, num) => {
 }, []);
 
 doubledOver50; // [60, 80]
+```
+
+reduce函数在mdn的定义如下：
+
+![reduce函数定义](http://oxx2s9vy2.bkt.clouddn.com/reduce%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89.png)
+
+将reduce函数的迭代初始值指定为一个空数组(即第二个参数)来存储满足条件的元素集合。
+
+### 使用 reduce 检测括号是否对齐封闭
+
+需求：实现一个接受一个字符串并判断括号是否对齐的函数
+
+思路：考虑使用reduce，将迭代初始值指定为数值0，每次迭代遇到 `(` 时accumulator加1，反之遇到 `)` 时accumulator减1，如果括号是封闭的话，最终返回值应该是0。
+
+```javascript
+//Returns 0 if balanced.
+const isParensBalanced = (str) => {
+  return str.split('').reduce((counter, char) => {
+    if(counter < 0) { //matched ")" before "("
+      return counter;
+    } else if(char === '(') {
+      return ++counter;
+    } else if(char === ')') {
+      return --counter;
+    }  else { //matched some other char
+      return counter; //<-- 返回counter以便下次迭代
+    }
+    
+  }, 0); //<-- 初始值指定为0
+}
 ```
 
