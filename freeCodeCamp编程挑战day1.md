@@ -8,15 +8,15 @@
 
 ```
 function palindrome(str) {
-	//去除字符串中所有空格和标点符号并变成小写，将处理后的字符串存入result
-  	var result = str.replace(/[\s\,\_\.\-\:\\\/\(\)]*/g,'').toLowerCase();
+  //去除字符串中所有空格和标点符号并变成小写，将处理后的字符串存入result
+  var result = str.replace(/[\s\,\_\.\-\:\\\/\(\)]*/g,'').toLowerCase();
 
-  	//反转字符串并变成小写之后并存入reverse
-  	var reverse = result.split('').reverse().join('').toLowerCase();
+  //反转字符串并变成小写之后并存入reverse
+  var reverse = result.split('').reverse().join('').toLowerCase();
 
-  	if (result === reverse)
-  		return true;
-  	return false;
+  if (result === reverse)
+    return true;
+   return false;
 }
 ```
 
@@ -24,19 +24,19 @@ function palindrome(str) {
 
 ```
 function findLongestWord(str) {
-    //先将句子中每个单词分开并存入数组arr
-    var arr = str.split(' ');
-    //定义空数组length用于存放每个单词的长度
-    var length = [];
-    //遍历arr 将每个单词的长度push到length数组中
-    arr.forEach(function (item, index) {
-    	length.push(item.length); 
-    });
-    //将length数组从小到大排序并且执行pop()操作，会返回最后一个元素，也就是最大长度值
-    var result = length.sort(function (a,b) {
-    	 return a-b;
-    }).pop()
-    return result;
+  //先将句子中每个单词分开并存入数组arr
+  var arr = str.split(' ');
+  //定义空数组length用于存放每个单词的长度
+  var length = [];
+  //遍历arr 将每个单词的长度push到length数组中
+  arr.forEach(function (item, index) {
+    length.push(item.length); 
+  });
+  //将length数组从小到大排序并且执行pop()操作，会返回最后一个元素，也就是最大长度值
+  var result = length.sort(function (a,b) {
+    return a-b;
+  }).pop()
+  return result;
 }
 
 findLongestWord("What if we try a super-long word such as otorhinolaryngology"); 
@@ -50,28 +50,22 @@ findLongestWord("What if we try a super-long word such as otorhinolaryngology");
 
 ```
 function titleCase(str) {
-	//将传入的句子分词并存入arr中 
-	var arr = str.split(' ');
-	//将每个单词首字母大写 其他字母小写
-	str = arr.map(function (item) {
-		//将每个单词分成字母并存入数组arr1
-		var arr1 = item.split('');
-	  	arr1 = arr1.map(function (item, index) {
-			if (index === 0) {
-				 item = item.toUpperCase();
-			}else {
-				 item = item.toLowerCase();
-			}
-			return item;
-	});
-	//重新拼接处理后的单词
-	item = arr1.join('');
-	//返回每个单词
-	return item;
-	});
-	//拼接句子
-	str = str.join(' ');
-	return str;
+  //将传入的句子分词并存入arr中 
+  var arr = str.split(' ');
+  //将每个单词首字母大写 其他字母小写
+  str = arr.map(function (item) {
+    //将每个单词分成字母并存入数组arr1
+    var arr1 = item.split('');
+    arr1 = arr1.map(function (item, index) {
+      if (index === 0) {
+        item = item.toUpperCase();
+      }else {
+        item = item.toLowerCase();
+      }
+    return arr1.join('');
+  });
+  //拼接句子
+  return = str.join(' ');
 }
 ```
 
@@ -84,13 +78,13 @@ chunk([1,2,3,4,5], 2) = [[1,2],[3,4],[5]];
 
 ```
 function chunk(arr, size) {
-	var result = [];
-	for (var i = 0; i < Math.ceil(arr.length/size); i++) {
-		var item = arr.slice(i*size, i*size+size);
-		result.push(item);
-	}
-	
-	return result;
+  var result = [];
+  for (var i = 0; i < Math.ceil(arr.length/size); i++) {
+    var item = arr.slice(i*size, i*size+size);
+    result.push(item);
+  }
+
+  return result;
 }
 
 chunk(["a", "b", "c", "d"], 2);
@@ -111,21 +105,24 @@ Math.round() // 四舍五入
 
 ```
 function mutation(arr) {
-  	var arr1 = arr[1].toLowerCase().split('');
-  	for (var i = 0; i < arr1.length; i++) {
-  		if (arr[0].toLowerCase().indexOf(arr1[i]) === -1)
-  			return false;
-  	}
-  	return true;
+  var arr1 = arr[1].toLowerCase().split('');
+  for (var i = 0; i < arr1.length; i++) {
+    if (arr[0].toLowerCase().indexOf(arr1[i]) === -1)
+      return false;
+  }
+  return true;
 }
 
 mutation(["hello", "Hello"]);   //true
 ```
 
 思路：1.将数组中第2个参数分割成数组arr1
-​	    2.遍历数组arr1
-​	    3.如果arr1中存在一个元素不存在于第一个参数时，返回false
-​	    4.否则返回true
+
+2.遍历数组arr1
+
+3.如果arr1中存在一个元素不存在于第一个参数时，返回false
+
+4.否则返回true
 
 #### 6.过滤数组假值
 
@@ -133,16 +130,17 @@ mutation(["hello", "Hello"]);   //true
 
 ```
 function bouncer(arr) {
-	arr = arr.filter(function (item) {
-		return !!item === true;
-	});
-	return arr;
+  arr = arr.filter(function (item) {
+    return !!item === true;
+  });
+  return arr;
 }
 
 bouncer([7, "ate", "", false, 9]); // [[7, "ate", 9]]
 ```
 
 思路：1.用filter函数过滤不符合规则的元素
+
 ​            2. `!! item` 将任意类型变量转换成布尔值。
 
 #### 7.摧毁数组
@@ -151,14 +149,14 @@ bouncer([7, "ate", "", false, 9]); // [[7, "ate", 9]]
 
 ```
 function destroyer(arr) {
-    var args = [];
-    for(var i = 1;i < arguments.length;i ++) {
-        args.push(arguments[i]);
-    }
-    arr = arr.filter(function (item) {
-        return args.indexOf(item) < 0 ;
-    });
-    return arr;
+  var args = [];
+  for(var i = 1;i < arguments.length;i ++) {
+    args.push(arguments[i]);
+  }
+  arr = arr.filter(function (item) {
+    return args.indexOf(item) < 0 ;
+  });
+  return arr;
 }
 
 destroyer([1, 2, 3, 1, 2, 3], 2, 3);  // [1, 1]
@@ -166,7 +164,7 @@ destroyer([1, 2, 3, 1, 2, 3], 2, 3);  // [1, 1]
 
 思路：1.首先用一个数组 `args` 存储除第一个参数外的所有参数，即要删除的值
 
-​	    2.用`filter`函数过滤掉`arr`里同样存在与`args`数组中的值。
+     2.用`filter`函数过滤掉`arr`里同样存在与`args`数组中的值。
 
 #### 8.凯撒密码
 
@@ -181,35 +179,35 @@ destroyer([1, 2, 3, 1, 2, 3], 2, 3);  // [1, 1]
 ```
 function rot13(str) {
 
-	// 用于存储字符串中所有字符的Unicode值
-	var arr = [];
-	
-	// 存储结果
-	var re = [];
-	
-	for (let i = 0; i < str.length; i++) {
-		arr.push(str[i].charCodeAt(0));
-	}
+  // 用于存储字符串中所有字符的Unicode值
+  var arr = [];
 
-	for (let i = 0; i < arr.length; i++) {
+  // 存储结果
+  var re = [];
 
-		// 如果字符是A~Z 则编码加13
-		if (arr[i] >= 65 && arr[i] <= 90) {
-			if (arr[i] <= 77)
-				arr[i] += 13;
-			else
-				arr[i] = arr[i] + 13 - 26 ;
-		}
-		re.push(String.fromCharCode(arr[i]));
-	}
+  for (let i = 0; i < str.length; i++) {
+    arr.push(str[i].charCodeAt(0));
+  }
 
-	// 重新连接字符串
-	re = re.join('');
-	return re;
+  for (let i = 0; i < arr.length; i++) {
+
+    // 如果字符是A~Z 则编码加13
+    if (arr[i] >= 65 && arr[i] <= 90) {
+      if (arr[i] <= 77)
+        arr[i] += 13;
+      else
+        arr[i] = arr[i] + 13 - 26 ;
+    }
+    re.push(String.fromCharCode(arr[i]));
+  }
+
+  // 重新连接字符串
+  re = re.join('');
+  return re;
 }
 
 
- rot13("SERR PBQR PNZC");  // "FREE CODE CAMP"
+rot13("SERR PBQR PNZC");  // "FREE CODE CAMP"
 ```
 
 1.首先存储str中所有字符的Unicode值，存到arr。

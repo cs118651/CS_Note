@@ -44,7 +44,7 @@ reduce函数在mdn的定义如下：
 //Returns 0 if balanced.
 const isParensBalanced = (str) => {
   return str.split('').reduce((counter, char) => {
-    if(counter < 0) { //matched ")" before "("
+    if(counter < 0) {
       return counter;
     } else if(char === '(') {
       return ++counter;

@@ -1,4 +1,4 @@
-### JS继承
+### JS高级程序设计读书笔记 - JS继承
 
 *下文中所提及的 “类型”  一词均指构造函数所代表的一种抽象，比如 Supertype 类型* 
 
@@ -6,24 +6,24 @@
 
 ```
 function SuperType(){
-	this.property = true;
+  this.property = true;
 } 
 SuperType.prototype.getSuperValue = function(){
-	return this.property;
+  return this.property;
 };
 function SubType(){
-	this.subproperty = false;
+  this.subproperty = false;
 }
 //继承了 SuperType
 SubType.prototype = new SuperType();
 SubType.prototype.getSubValue = function (){
-	return this.subproperty;
+  return this.subproperty;
 };
 var instance = new SubType();
 alert(instance.getSuperValue()); //true 
 ```
 
-​	以上代码定义了两个构造函数：`SuperType` 和 `Subtype` 。通过将 `SuperType` 的一个实例赋给 `Subtype` 的原型对象来实现继承，此时的 `Subtype.prototype` 拥有了 `Subtype` 实例的所有属性和方法并且它的 `__proto__` 属性会指向 `SuperType.prototype` ，此时:
+  以上代码定义了两个构造函数：`SuperType` 和 `Subtype` 。通过将 `SuperType` 的一个实例赋给 `Subtype` 的原型对象来实现继承，此时的 `Subtype.prototype` 拥有了 `Subtype` 实例的所有属性和方法并且它的 `__proto__` 属性会指向 `SuperType.prototype` ，此时:
 
 ```
 instance.__proto__.__proto__ === SuperType.prototype   //true
@@ -33,13 +33,13 @@ instance.__proto__.__proto__ === SuperType.prototype   //true
 
 ```
 function SuperType(){
-	this.property = true;
-	this.supArr = [1,2,3];
+  this.property = true;
+  this.supArr = [1,2,3];
 }
 ... //省略号表示和上文代码一致
 function SubType(){
-	this.subproperty = false;
-	this.subArr = [4,5,6]
+  this.subproperty = false;
+  this.subArr = [4,5,6]
 }
 ... 
 var instance1 = new SubType();
@@ -64,12 +64,12 @@ child.prototype = new parent()
 
 ```
 function SuperType(name){
-	this.name = name;
-	this.colors = ["red", "blue", "green"];
+  this.name = name;
+  this.colors = ["red", "blue", "green"];
 }
 function SubType(){
-	//继承了 SuperType
-	SuperType.call(this,'andy');
+  //继承了 SuperType
+  SuperType.call(this,'andy');
 }
 var instance1 = new SubType();
 instance1.colors.push("black");
@@ -88,17 +88,17 @@ alert(instance2.colors); //"red,blue,green"
 
 ```
 function SuperType(name){
- this.name = name;
- this.colors = ["red", "blue", "green"];
+  this.name = name;
+  this.colors = ["red", "blue", "green"];
 }
 SuperType.prototype.sayName = function(){
- alert(this.name); 
- };
+  alert(this.name); 
+};
  
 function SubType(name, age){
- //继承属性
- SuperType.call(this, name);
- this.age = age;
+  //继承属性
+  SuperType.call(this, name);
+  this.age = age;
 }
 
 //继承方法

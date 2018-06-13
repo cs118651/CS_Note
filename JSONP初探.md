@@ -1,6 +1,6 @@
 #### JSONP初探
 
-​	jsonp(json with padding)虽然与json仅一字之差，但意义却大相径庭。json是一种基于文本的数据交换方式，而jsonp则是json的一种“使用模式”，用于解决跨域数据访问。
+  jsonp(json with padding)虽然与json仅一字之差，但意义却大相径庭。json是一种基于文本的数据交换方式，而jsonp则是json的一种“使用模式”，用于解决跨域数据访问。
 
 ##### jsonp的产生
 

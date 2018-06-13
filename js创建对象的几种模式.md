@@ -4,14 +4,14 @@
 
 ```
 function createPerson(name, age, job){
-	var o = new Object();
- 	o.name = name;
- 	o.age = age;
- 	o.job = job;
- 	o.sayName = function(){
- 	alert(this.name);
-	};
-	return o;
+  var o = new Object();
+   o.name = name;
+   o.age = age;
+   o.job = job;
+   o.sayName = function(){
+   alert(this.name);
+  };
+  return o;
 }
 var person1 = createPerson("Nicholas", 29, "Software Engineer");
 var person2 = createPerson("Greg", 27, "Doctor"); 
@@ -21,12 +21,12 @@ var person2 = createPerson("Greg", 27, "Doctor");
 
 ```
 function Person(name, age, job){
-	this.name = name;
-	this.age = age;
-	this.job = job;
-	this.sayName = function(){
-	alert(this.name);
- 	};
+  this.name = name;
+  this.age = age;
+  this.job = job;
+  this.sayName = function(){
+  alert(this.name);
+   };
 }
 var person1 = new Person("Nicholas", 29, "Software Engineer");
 var person2 = new Person("Greg", 27, "Doctor"); 
@@ -34,13 +34,13 @@ var person2 = new Person("Greg", 27, "Doctor");
 
 构造函数模式中的  `new` 操作符在创建一个对象实例的过程中做了如下4个步骤：
 
-​	1.创建一个新对象。  // var o = new Object();
+​  1.创建一个新对象。  // var o = new Object();
 
-​	2.将构造函数作用域赋给新对象(改变this指向)。
+​  2.将构造函数作用域赋给新对象(改变this指向)。
 
-​	3.执行代码(添加属性和方法)。
+​  3.执行代码(添加属性和方法)。
 
-​	4.返回新对象。       // return o;
+​  4.返回新对象。       // return o;
 
 在前面的例子中，两个实例person1和person2拥有了一个 `constructer` 属性，指向 `Person` 构造函数。
 
@@ -56,7 +56,7 @@ alert(person2.constructor == Person); //true
 >
 > **person1 instanceof Person      //true**
 
-#### 	构造函数模式的缺陷在于不够灵活，如果需要拥有相同方法和属性的对象，就会造成资源的浪费。
+####   构造函数模式的缺陷在于不够灵活，如果需要拥有相同方法和属性的对象，就会造成资源的浪费。
 
 ### 3.原型模式
 
@@ -78,19 +78,19 @@ person2.sayName(); //"Nicholas"
 alert(person1.sayName == person2.sayName); //true 
 ```
 
-​	无论任何时候，只要创建了一个新函数，就会根据特定规则为该函数创建一个 `prototype` 属性，这个属性是一个指针，指向函数的原型对象。即 `Person.prototype === Person.prototype` ，我的理解是等式左边意为 “**构造函数的 prototype 属性**” ，等式右边要看做一个**整体**，即 **构造函数的原型对象** 。
+​  无论任何时候，只要创建了一个新函数，就会根据特定规则为该函数创建一个 `prototype` 属性，这个属性是一个指针，指向函数的原型对象。即 `Person.prototype === Person.prototype` ，我的理解是等式左边意为 “**构造函数的 prototype 属性**” ，等式右边要看做一个**整体**，即 **构造函数的原型对象** 。
 
-​	当然同时，原型对象也将并且**唯一**获得一个 `constructor` 属性，它指向构造函数(与前面正好相对) ，原型对象还会从 Object 上继承其他的方法。
+​  当然同时，原型对象也将并且**唯一**获得一个 `constructor` 属性，它指向构造函数(与前面正好相对) ，原型对象还会从 Object 上继承其他的方法。
 
-​	此外，当用 `new` 操作符创建一个实例之后，又涉及到一个属性(指针)，即 `__proto__` ，它指向构造函数的原型对象。
+​  此外，当用 `new` 操作符创建一个实例之后，又涉及到一个属性(指针)，即 `__proto__` ，它指向构造函数的原型对象。
 
 ##### 至此，一共出现了3个概念和3个指针，他们之间的关系是：
 
-​	构造函数.prototype ------------>  原型对象
+​  构造函数.prototype ------------>  原型对象
 
-​	原型对象.constructor ----------------> 构造函数
+​  原型对象.constructor ----------------> 构造函数
 
-​	实例.__proto_\_  ----------------------> 构造函数
+​  实例.__proto_\_  ----------------------> 构造函数
 
 用一张著名的图来表示：
 
@@ -98,19 +98,19 @@ alert(person1.sayName == person2.sayName); //true
 
 图中我们可以发现一个问题，两个实例都不包含 **sayName()** 方法但却可以调用该方法，这就涉及到查找对象属性的过程，即依据**原型链**来查找。
 
-##### 	在读取某个对象的属性或者方法时，原型链的实现流程是这样的：
+#####   在读取某个对象的属性或者方法时，原型链的实现流程是这样的：
 
-​	1.首先检查对象实例上是否存在该属性。 //person1
+​  1.首先检查对象实例上是否存在该属性。 //person1
 
-​	2.若不存在，检查对象实例的原型对象上是否存在该属性。 //Person.prototype
+​  2.若不存在，检查对象实例的原型对象上是否存在该属性。 //Person.prototype
 
-​	3.若不存在，检查原型对象的原型对象上是否存在该属性。 //Object.prototype
+​  3.若不存在，检查原型对象的原型对象上是否存在该属性。 //Object.prototype
 
-​	4.若不存在，则返回null。 //null是原型链的结束
+​  4.若不存在，则返回null。 //null是原型链的结束
 
 更直观的看，本例中的原型链为：
 
-​	**person1----------->Person.prototype----------->Object.prototype----------->null**
+​  **person1----------->Person.prototype----------->Object.prototype----------->null**
 
 ####   3.2 关于原型对象和实例的一些操作符和方法
 
@@ -175,12 +175,12 @@ alert(Person.prototype.isPrototypeOf(person2)); //true
 function Person(){
 }
 Person.prototype = {
-	name : "Nicholas",
- 	age : 29,
- 	job: "Software Engineer",
- 	sayName : function () {
- 	alert(this.name);
- 	}
+  name : "Nicholas",
+   age : 29,
+   job: "Software Engineer",
+   sayName : function () {
+   alert(this.name);
+   }
 }; 
 ```
 
@@ -210,17 +210,17 @@ console.log(friend.constructor === Person.prototype.constructor)  //true
 function Person(){
 }
 Person.prototype = {
-	constructor : Person,   //显示地声明了constructor属性就等于构造函数
-	name : "Nicholas",
-	age : 29,
-	job: "Software Engineer",
-	sayName : function () {
-	alert(this.name);
- 	}
+  constructor : Person,   //显示地声明了constructor属性就等于构造函数
+  name : "Nicholas",
+  age : 29,
+  job: "Software Engineer",
+  sayName : function () {
+  alert(this.name);
+   }
 };
 ```
 
-​	但是这样做会带来一个副作用，导致 `constructor` 属性的 [[Enumerable]] (可枚举的)特性被设置为 true。默认情况下，原生的 constructor 属性是不可枚举的，如果不想出现这种情况，可以采用如下方式：
+​  但是这样做会带来一个副作用，导致 `constructor` 属性的 [[Enumerable]] (可枚举的)特性被设置为 true。默认情况下，原生的 constructor 属性是不可枚举的，如果不想出现这种情况，可以采用如下方式：
 
 ```
 //重设构造函数，只适用于 ECMAScript 5 兼容的浏览器
@@ -230,24 +230,24 @@ Object.defineProperty(Person.prototype, "constructor", {
 });
 ```
 
-##### 	原型模式的问题在于所有的属性和方法都被实例所共享，当我们需要一些私有的属性和方法时就要组合使用两种模式，当然这也是最常用的一种模式。
+#####   原型模式的问题在于所有的属性和方法都被实例所共享，当我们需要一些私有的属性和方法时就要组合使用两种模式，当然这也是最常用的一种模式。
 
 ### 4.构造函数模式+原型模式
 
 ```
 //独有的属性方法定义在构造函数中
 function Person(name, age, job){
- 	this.name = name;
- 	this.age = age;
- 	this.job = job;
- 	this.friends = ["Shelby", "Court"];
+   this.name = name;
+   this.age = age;
+   this.job = job;
+   this.friends = ["Shelby", "Court"];
 }
 //共享的属性方法定义在原型中
 Person.prototype = {
-	constructor : Person,
-	sayName : function(){
-	alert(this.name);
-	}
+  constructor : Person,
+  sayName : function(){
+  alert(this.name);
+  }
 } 
 ```
 
@@ -255,16 +255,16 @@ Person.prototype = {
 
 ```
 function Person(name, age, job){
-	//属性
-	this.name = name;
-	this.age = age;
-	this.job = job;
-	//方法
-	if (typeof this.sayName != "function"){
- 		Person.prototype.sayName = function(){
- 			alert(this.name);
- 		};
-	}
+  //属性
+  this.name = name;
+  this.age = age;
+  this.job = job;
+  //方法
+  if (typeof this.sayName != "function"){
+     Person.prototype.sayName = function(){
+       alert(this.name);
+     };
+  }
 }
 var friend = new Person("Nicholas", 29, "Software Engineer");
 friend.sayName();
